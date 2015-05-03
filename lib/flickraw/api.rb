@@ -23,6 +23,7 @@ module FlickRaw
   URL_PROFILE='https://www.flickr.com/people/'.freeze
   URL_PHOTOSTREAM='https://www.flickr.com/photos/'.freeze
   URL_SHORT='https://flic.kr/p/'.freeze
+  BUDDY_ICONS_URL='http://farm%s.staticflickr.com/%s/buddyicons/%s_%s.jpg'.freeze
 
   class FlickrAppNotConfigured < Error; end
 
@@ -209,6 +210,7 @@ module FlickRaw
     def url_short_t(r); URL_SHORT + "img/" + base58(r.id) + "_t.jpg" end
     def url_short_q(r); URL_SHORT + "img/" + base58(r.id) + "_q.jpg" end
     def url_short_n(r); URL_SHORT + "img/" + base58(r.id) + "_n.jpg" end
+    def buddy_icon_url(r, size = 'r'); BUDDY_ICONS_URL % [r.iconfarm, r.iconserver, r.nsid, size]; end
     def url_photostream(r)
       URL_PHOTOSTREAM +
         if r.respond_to?(:pathalias) and r.pathalias
